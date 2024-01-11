@@ -9,5 +9,10 @@ export function addCategory(data) {
 }
 
 export function deleteCategory(id) {
-    return axios.post("/admin/category/delete", {id})
+    return axios.post("/admin/category/delete", { id })
+}
+
+// 获取下拉列表
+export function getCategorySelectList() {
+    return axios.post("/admin/category/select/list")
 }

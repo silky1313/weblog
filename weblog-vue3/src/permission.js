@@ -10,6 +10,7 @@ import {
 router.beforeEach((to, from, next) => {
   showPageLoading();
   let token = getToken();
+  console.log(token);
   if (!token && to.path.startsWith("/admin")) {
     showMessage("请先登录", "warning");
     next({ path: "/login" });

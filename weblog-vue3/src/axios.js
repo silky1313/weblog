@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "@/composables/cookie";
+import { getToken, removeToken } from "@/composables/cookie";
 import { showMessage } from "@/composables/util.js";
 
 // 创建 Axios 实例
@@ -36,6 +36,13 @@ instance.interceptors.response.use(
   function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
+    let status = error.response.status
+
+    if (status == 401) {
+      removeToken()
+      location.reload()
+    }
+
     let errorMsg = error.response.data.message || "请求失败";
     showMessage(errorMsg, "error");
     return Promise.reject(error);
